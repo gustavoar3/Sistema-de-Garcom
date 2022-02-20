@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Garcom";
+    List<Business.Menu> menus = ViewBag.Cardapio;
+
+    List<Business.Pedido> pedidos = ViewBag.Pedidos;
+    int aux = 0;
+}
+
+<div class="jumbotron">
+    <h1>Cardapio</h1>
+    <table class="table">
+        <tr>
+            <th>Pratos</th>
+            <th>Descrição</th>
+        </tr>
+
+        @foreach (var i in menus)
+        {
+            if (aux == 7)
+            {
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+
+                    <th>Bebidas</th>
+                    <th>Descrição</th>
+                </tr>
+            }
+            <tr>
+                <td>@i.Nome</td>
+                <td>@i.Descricao</td>
+            </tr>
+            aux = aux + 1;
+        }
+    </table>
+
+    <div>
+        <a href="/pedido/novo" class="btn btn-default">Fazer Pedido</a>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div>
+        <a href="/pedido/entregues" class="btn btn-default">Pedidos Entregues</a>
+    </div>
+
+    <h1>Preparados</h1>
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>Mesa</td>
+            <td>Prato</td>
+            <td>QtdPrato</td>
+            <td>Bebida</td>
+            <td>QtdBebida</td>
+        </tr>
+
+        @foreach (var i in pedidos)
+        {
+            bool isReady = i.PratoR == true & i.BebidaR == true;
+
+            if (isReady & i.Entregue == false)
+            {
+                <tr>
+                    <td>@i.NomeCliente</td>
+                    <td>@i.Mesa</td>
+                    <td>@i.Prato</td>
+                    <td>@i.QtdPrato</td>
+                    <td>@i.Bebida</td>
+                    <td>@i.QtdBebida</td>
+                    <td>
+                        <a href="/pedido/@i.Id/tudo">Entregar</a>
+                    </td>
+                </tr>
+
+            }
+        }
+    </table>
+</div>
+

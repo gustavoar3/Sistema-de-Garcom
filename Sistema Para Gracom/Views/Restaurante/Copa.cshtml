@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Copa";
+    List<Business.Pedido> pedidos = ViewBag.Cardapio;
+}
+
+<div class="jumbotron">
+    <h1>Pedidos de Bebidas</h1>
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>Mesa</td>
+            <td>Bebidas</td>
+            <td>Quantidade</td>
+        </tr>
+
+        @foreach (var i in pedidos)
+        {
+            if (i.BebidaR == false)
+            {
+                <tr>
+                    <td>@i.NomeCliente</td>
+                    <td>@i.Mesa</td>
+                    <td>@i.Bebida</td>
+                    <td>@i.QtdBebida</td>
+                    <td>
+                        <a href="/pedido/@i.Id/bebida">Entregar Bebida</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<div class="jumbotron">
+    <h1>Preparados</h1>
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>Mesa</td>
+            <td>Bebidas</td>
+            <td>Quantidade</td>
+        </tr>
+
+        @foreach (var i in pedidos)
+        {
+            bool valido = i.Bebida != "Nenhum" && i.QtdBebida != 0;
+            if (i.BebidaR && i.Entregue == false && valido)
+            {
+                <tr>
+                    <td>@i.NomeCliente</td>
+                    <td>@i.Mesa</td>
+                    <td>@i.Bebida</td>
+                    <td>@i.QtdBebida</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Novo Pedido";
+    List<Business.Menu> menus = ViewBag.Cardapio;
+}
+
+<!--Formulário para pedido-->
+<div class="jumbotron">
+    <h3>Fazer Pedido</h3>
+    <!--Botão de voltar-->
+    <div>
+        <a href="/garcom" class="btn btn-default">Voltar</a>
+    </div>
+
+    <!--Campo para nome-->
+    <form action="/pedido/criar" method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control is-invalid" id="nome" name="nome" placeholder="Escreva o nome do cliente" required>
+        </div>
+        <!--Seleção para mesa-->
+        <div class="form-group">
+            <label for="mesa">Mesa</label>
+            <select class="form-control" id="mesa" name="mesa">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+            </select>
+        </div>
+        <!--Campo de seleção para prato-->
+        <div class="form-group">
+            <label for="prato">Prato</label>
+            <select class="form-control" id="prato" name="prato">
+                <option>Nenhum</option>
+                @foreach (var i in menus)
+                {
+                    if (i.Tipo == false)
+                    {
+                        <option>@i.Nome</option>
+                    }
+                }
+            </select>
+        </div>
+        <!--Campo de escrita para quantidade de pratos-->
+        <div class="form-group">
+            <label for="qtdprato">Quatidade:</label>
+            <input type="text" class="form-control" id="qtdprato" name="qtdprato" placeholder="Escreva a quantidade" required>
+        </div>
+        <!--Campo para seleção da bebida-->
+        <div class="form-group">
+            <label for="bebida">Bebida</label>
+            <select class="form-control" id="bebida" name="bebida">
+                <option>Nenhum</option>
+                @foreach (var i in menus)
+                {
+                    if (i.Tipo == true)
+                    {
+                        <option>@i.Nome</option>
+                    }
+                }
+            </select>
+        </div>
+        <!--Campo para escrita da quantidade de bebida-->
+        <div class="form-group">
+            <label for="qtdbebida">Quantidade:</label>
+            <input type="text" class="form-control" id="qtdbebida" name="qtdbebida" placeholder="Escreva a quantidade" required>
+        </div>
+        <!--Botão para finalizar pedido-->
+        <button type="submit" class="btn btn-primary">Pedir</button>
+    </form>
+</div>

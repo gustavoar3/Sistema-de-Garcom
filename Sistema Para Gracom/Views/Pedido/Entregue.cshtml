@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Entregue";
+    List<Business.Pedido> pedidos = ViewBag.Cardapio;
+}
+
+<script>
+    // Função para confirmar a exclusão e evitar erros
+    var ValidaExclusao = function (id, evento) {
+        if (confirm("Confirma exclusao?")) return true;
+
+        evento.preventDefault();
+        return false;
+    }
+</script>
+
+<div class="jumbotron">
+    <h1>Entregues</h1>
+    <!--Exibe uma tabela com os pedidos em que Entregue é true, assim como um botão em suas frentes para excluí-los da tabela-->
+    <table class="table">
+        <tr>
+            <td>Nome</td>
+            <td>Mesa</td>
+            <td>Prato</td>
+            <td>QtdPrato</td>
+            <td>Bebida</td>
+            <td>QtdBebida</td>
+        </tr>
+
+        @foreach (var i in pedidos)
+        {
+            if (i.Entregue)
+            {
+                <tr>
+                    <td>@i.NomeCliente</td>
+                    <td>@i.Mesa</td>
+                    <td>@i.Prato</td>
+                    <td>@i.QtdPrato</td>
+                    <td>@i.Bebida</td>
+                    <td>@i.QtdBebida</td>
+                    <td>
+                        <a href="/pedido/@i.Id/excluir" class="btn btn-default" onclick="ValidaExclusao(@i.Id, event)">Excluir Dados</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
