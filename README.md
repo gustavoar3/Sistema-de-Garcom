@@ -26,7 +26,7 @@ Recomenda-se utilizar o [Visual Studio](https://code.visualstudio.com/) como edi
  
  ### Inicialização
  
-  Abra a solução localizada em "Sistema de Garcom" e a execute em um navegador.
+  Abra a solução localizada em "Sistema de Garcom" e a execute com um navegador. Recomendável utilizar o IIS Express (já disponível no Visual Studio), para abrir o programa.
  
  ### Tecnologias
 - [C#]() para o backend
